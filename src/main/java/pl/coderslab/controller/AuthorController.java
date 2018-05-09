@@ -72,9 +72,14 @@ public class AuthorController {
     }
 
     @PostMapping("/author/delete/{id}")
-    public String delete(@ModelAttribute Author author, @PathVariable long id, @RequestParam String agree) {
+    public String delete(@ModelAttribute Author author, @PathVariable long id, @RequestParam String agree, Model model) {
         if (agree.equals("yes")) {
-            authorDao.delete(author.getId());
+            try {
+                authorDao.delete(author.getId());
+            } catch (Exception e){
+                model.addAttribute("error", "author");
+                return "Error";
+            }
         }
         return "redirect:/author";
     }

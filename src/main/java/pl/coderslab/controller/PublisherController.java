@@ -71,9 +71,14 @@ import java.util.Random;
     }
 
     @PostMapping("/publisher/delete/{id}")
-    public String delete(@ModelAttribute Publisher publisher, @PathVariable long id, @RequestParam String agree) {
+    public String delete(@ModelAttribute Publisher publisher, @PathVariable long id, @RequestParam String agree, Model model) {
         if (agree.equals("yes")) {
-            publisherDao.delete(publisher.getId());
+            try {
+                publisherDao.delete(publisher.getId());
+            } catch (Exception e){
+                model.addAttribute("error", "publisher");
+                return "Error";
+            }
         }
         return "redirect:/publisher";
     }

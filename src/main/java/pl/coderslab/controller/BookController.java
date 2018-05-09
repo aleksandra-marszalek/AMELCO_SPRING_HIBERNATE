@@ -73,9 +73,14 @@ public class BookController {
     }
 
     @PostMapping("/book/delete/{id}")
-    public String delete(@ModelAttribute Book book, @PathVariable long id, @RequestParam String agree) {
+    public String delete(@ModelAttribute Book book, @PathVariable long id, @RequestParam String agree, Model model) {
         if (agree.equals("yes")) {
-            bookDao.delete(book.getId());
+            try {
+                bookDao.delete(book.getId());
+            } catch (Exception e) {
+                model.addAttribute("error", "book");
+                return "Error";
+            }
         }
         return "redirect:/book";
     }
