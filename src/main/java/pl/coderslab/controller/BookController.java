@@ -13,6 +13,7 @@ import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
 import pl.coderslab.interfaces.ValidationProposition;
+import pl.coderslab.respository.BookRepository;
 
 import javax.validation.Valid;
 
@@ -32,6 +33,9 @@ public class BookController {
     @Autowired
     AuthorDao authorDao;
 
+    @Autowired
+    BookRepository bookRepository;
+
     @GetMapping("/book/add")
     public String bookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -49,7 +53,10 @@ public class BookController {
 
     @GetMapping("/book")
     public String allBooks(Model model) {
-        List<Book> books = bookDao.findAll();
+      //  List<Book> books = bookDao.findAll();
+//        List<Book> books = bookRepository.findAllByTitle("new propo");
+       // List<Book> books = bookRepository.findAllByAuthorId(new Long(7));
+        List<Book> books = bookRepository.findAllByAuthorsId(new Long(7));
         model.addAttribute("books", books);
         return "BookList";
     }
