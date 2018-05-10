@@ -12,6 +12,7 @@ import pl.coderslab.dao.BookDao;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
+import pl.coderslab.respository.AuthorRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -27,6 +28,21 @@ public class AuthorController {
 
     @Autowired
     BookDao bookDao;
+
+    @Autowired
+    AuthorRepository authorRepository;
+
+    @GetMapping("/check")
+    @ResponseBody
+    public String check() {
+
+        List<Author> authors = authorRepository.findAllByEmailStarts("ank");
+        List<String> authorNames = new ArrayList<>();
+        for (Author a:authors) {
+            authorNames.add(a.getFirstName() + " " + a.getLastName());
+        }
+        return authorNames.toString();
+    }
 
     @GetMapping("/author")
     public String allAuthors(Model model) {

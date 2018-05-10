@@ -11,8 +11,10 @@ import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
 import pl.coderslab.entity.Publisher;
+import pl.coderslab.respository.PublisherRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +26,10 @@ import java.util.Random;
         PublisherDao publisherDao;
 
         @Autowired
-    BookDao bookDao;
+        BookDao bookDao;
+
+        @Autowired
+    PublisherRepository publisherRepository;
 
 
     @GetMapping("/publisher")

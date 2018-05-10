@@ -15,9 +15,6 @@ import pl.coderslab.entity.Publisher;
 import pl.coderslab.interfaces.ValidationProposition;
 import pl.coderslab.respository.BookRepository;
 
-import javax.validation.Valid;
-
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +33,15 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
+
+    @GetMapping("/resetRating")
+    @ResponseBody
+    public String reset() {
+        bookRepository.resetRating(3);
+        return "You got it";
+    }
+
+
     @GetMapping("/book/add")
     public String bookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -53,10 +59,11 @@ public class BookController {
 
     @GetMapping("/book")
     public String allBooks(Model model) {
-      //  List<Book> books = bookDao.findAll();
-//        List<Book> books = bookRepository.findAllByTitle("new propo");
-       // List<Book> books = bookRepository.findAllByAuthorId(new Long(7));
-        List<Book> books = bookRepository.findAllByAuthorsId(new Long(7));
+       // List<Book> books = bookDao.findAll();
+        Author author = authorDao.findById(new Long(7));
+        List<Book> books = new ArrayList<>();
+        Book book = bookRepository.findFirstByAuthorsOrderByTitle(author);
+        books.add(book);
         model.addAttribute("books", books);
         return "BookList";
     }
