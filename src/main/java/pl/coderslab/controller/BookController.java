@@ -59,13 +59,13 @@ public class BookController {
 
     @GetMapping("/book")
     public String allBooks(Model model) {
-       // List<Book> books = bookDao.findAll();
-        Author author = authorDao.findById(new Long(7));
-        List<Book> books = new ArrayList<>();
-        Book book = bookRepository.findFirstByAuthorsOrderByTitle(author);
-        books.add(book);
+       List<Book> books = bookDao.findAll();
+//        Author author = authorDao.findById(new Long(7));
+//        List<Book> books = new ArrayList<>();
+//        Book book = bookRepository.findFirstByAuthorsOrderByTitle(author);
+//        books.add(book);
         model.addAttribute("books", books);
-        return "BookList";
+        return "BookListBootstrap";
     }
 
     @GetMapping("/book/edit/{id}")

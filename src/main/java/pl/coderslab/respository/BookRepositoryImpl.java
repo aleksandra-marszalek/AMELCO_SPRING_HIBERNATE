@@ -30,5 +30,6 @@ public class BookRepositoryImpl implements MyRepoCustom {
         query.setParameter("rating", rating);
         em.joinTransaction();
         query.executeUpdate();
+        em.close();
     }
 }
