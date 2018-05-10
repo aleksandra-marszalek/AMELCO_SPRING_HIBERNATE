@@ -22,28 +22,28 @@ public class Book {
     private Long id;
 
     @Size(min=5)
-    @NotNull(groups={ValidationProposition.class, Default.class})
+    @NotNull(groups={Default.class, ValidationProposition.class})
     private String title;
 
-    @Min(1)
-    @Max(10)
+    @Min(value=1, groups={ValidationProposition.class})
+    @Max(value=10, groups={ValidationProposition.class})
     private int rating;
 
-    @NotEmpty
+    @NotEmpty(groups={ValidationProposition.class})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors = new ArrayList<>();
 
-    @NotNull
+    @NotNull(groups={ValidationProposition.class})
     @ManyToOne
     private Publisher publisher;
 
-    @Min(1)
+    @Min(value=1, groups={ValidationProposition.class})
     private int pages;
 
 
     @Size(max = 600)
     @Column(columnDefinition = "TEXT")
-    @NotNull(groups={ValidationProposition.class, Default.class})
+    @NotNull(groups={Default.class, ValidationProposition.class})
     private String description;
 
 

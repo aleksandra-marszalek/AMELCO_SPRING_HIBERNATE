@@ -37,7 +37,7 @@ public class PropositionController {
     }
 
     @PostMapping("/proposition/add")
-    public String propositionForm(@Validated({ValidationProposition.class}) @ModelAttribute Book book, BindingResult result) {
+    public String propositionForm(@Valid @ModelAttribute Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "PropositionForm";
         }

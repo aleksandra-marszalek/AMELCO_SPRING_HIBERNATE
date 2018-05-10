@@ -25,6 +25,7 @@
 
     <form:hidden path="id" value="${publisher.id}"/>
 
+
     <input type="submit" value="save"/>
 
 

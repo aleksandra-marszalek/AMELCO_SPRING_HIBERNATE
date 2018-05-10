@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.dao.BookDao;
@@ -11,6 +12,7 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
+import pl.coderslab.interfaces.ValidationProposition;
 
 import javax.validation.Valid;
 
@@ -37,7 +39,7 @@ public class BookController {
     }
 
     @PostMapping("/book/add")
-    public String bookForm(@Valid @ModelAttribute Book book, BindingResult result) {
+    public String bookForm(@Validated({ValidationProposition.class}) @ModelAttribute Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "BookForm";
         }

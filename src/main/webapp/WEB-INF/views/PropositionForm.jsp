@@ -20,7 +20,7 @@
     <form:textarea path="description" placeholder="description"/>
     <form:errors path="description"/>
 
-    <form:hidden path="proposition"/>
+    <form:hidden path="proposition" value="true"/>
 
 
     <input type="submit" value="save"/>
